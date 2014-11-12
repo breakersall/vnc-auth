@@ -3,13 +3,13 @@ Enumerates supported security types on each discovered VNC server.
 ]]
 author = "Steve Ocepek <socepek@trustwave.com>" 
 license = "Same as Nmap--See http://nmap.org/book/man-legal.html"
+local shortport = require "shortport"
 
 categories = {"auth"}
 
 --require "stdnse"
-require "shortport"
 
-portrule = shortport.port_or_service(5900, "vnc")
+portrule = shortport.port_or_service( {5800, 5900, 5901, 5902} , "vnc", "tcp", "open")
 
 action = function(host, port)
     local socket = nmap.new_socket()
